@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerAttackState" load_steps=2 format=3 uid="uid://bnhgh4dinf364"]
+
+[ext_resource type="Script" uid="uid://bittrm3io4o8" path="res://Classes/StateMachine/States/PlayerStates/PlayerAttackState.cs" id="1_ft8ud"]
+
+[resource]
+script = ExtResource("1_ft8ud")
+_nextAttackState = 4
+_attackAnimation = &"attack1"
+metadata/_custom_type_script = "uid://bittrm3io4o8"

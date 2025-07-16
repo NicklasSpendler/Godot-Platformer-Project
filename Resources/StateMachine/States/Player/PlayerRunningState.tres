@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerRunningState" load_steps=2 format=3 uid="uid://eveb8k441oqk"]
+
+[ext_resource type="Script" uid="uid://be1pfdmjmm3x6" path="res://Classes/StateMachine/States/PlayerStates/PlayerRunningState.cs" id="1_rat2f"]
+
+[resource]
+script = ExtResource("1_rat2f")
+RightHurtboxPosition = Vector2(17, 0)
+LeftHurtboxPosition = Vector2(-17, 0)
+metadata/_custom_type_script = "uid://be1pfdmjmm3x6"

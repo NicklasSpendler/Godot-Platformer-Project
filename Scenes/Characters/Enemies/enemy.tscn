@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://hdoq8arepg6a"]
+
+[ext_resource type="Script" uid="uid://d4lharyq3yce6" path="res://Scenes/Characters/Enemies/Enemy.cs" id="1_wxnum"]
+[ext_resource type="Script" uid="uid://f6bqe0edoyoy" path="res://Classes/StateMachine/States/State.cs" id="2_3ekg1"]
+[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="3_ofthe"]
+
+[sub_resource type="Resource" id="Resource_67xvd"]
+script = ExtResource("3_ofthe")
+States = Dictionary[int, ExtResource("2_3ekg1")]({})
+metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_wxnum")
+StateMachine = SubResource("Resource_67xvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../AnimationPlayer")

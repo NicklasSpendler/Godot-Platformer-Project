@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="IdleState" load_steps=2 format=3 uid="uid://bc4vgyvdvync5"]
+
+[ext_resource type="Script" uid="uid://djti1wwrkwber" path="res://Classes/StateMachine/States/PlayerStates/PlayerIdleState.cs" id="1_p6ren"]
+
+[resource]
+script = ExtResource("1_p6ren")
+metadata/_custom_type_script = "uid://djti1wwrkwber"
