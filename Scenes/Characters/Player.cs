@@ -9,9 +9,10 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float Acceleration = 800.0f;
 	[Export]
-	public float JumpVelocity = -400.0f;
-	[Export]
 	public float Friction = 1000.0f;
+	
+	[Export]
+	public float JumpVelocity = -400.0f;
 
 	[ExportCategory("Combat")]
 	[Export] public float Damage = 10.0f;
@@ -70,7 +71,7 @@ public partial class Player : CharacterBody2D
 	{
 		base._PhysicsProcess(delta);
 		
-		velocity = Velocity;
+		//velocity = Velocity;
 		
 		StateMachine.CurrentState.PhysicsUpdate(delta);
 	}
@@ -85,30 +86,7 @@ public partial class Player : CharacterBody2D
 		
 		StateMachine.CurrentState.HandleInput(@event);
 	}
-
-	public void HandleMovement(double delta)
-	{
-		MoveAndSlide();
-	}
-
-	public void HandleMovementInput(double delta)
-	{
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		if (direction != Vector2.Zero)
-		{
-			//velocity.X = direction.X * HandleSpeed;
-			velocity.X = Mathf.MoveToward(velocity.X, direction.X * MaxSpeed, Acceleration * (float)delta);
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(velocity.X, 0, Friction * (float)delta);
-		}
-
-		Velocity = velocity;
-	}
-
+	
 	public void HandleJump()
 	{
 		velocity.Y = JumpVelocity;

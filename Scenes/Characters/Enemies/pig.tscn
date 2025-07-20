@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://daouw1odpflyw"]
+[gd_scene load_steps=34 format=3 uid="uid://daouw1odpflyw"]
 
 [ext_resource type="PackedScene" uid="uid://hdoq8arepg6a" path="res://Scenes/Characters/Enemies/enemy.tscn" id="1_qi8uk"]
 [ext_resource type="Script" uid="uid://bmc7kn0foijcv" path="res://Scenes/Characters/Enemies/Pig.cs" id="2_4b10j"]
@@ -10,6 +10,9 @@
 [ext_resource type="Resource" uid="uid://dma1itw3j64ab" path="res://Resources/StateMachine/States/Enemy/PigPatrolState.tres" id="6_6qgph"]
 [ext_resource type="Texture2D" uid="uid://4leu1pmgm35w" path="res://Assets/Characters/Mobs/Boar/Walk/Walk-Base-Sheet.png" id="6_tq8x3"]
 [ext_resource type="Texture2D" uid="uid://blhaxuuhyoy04" path="res://Assets/Characters/Mobs/Boar/Run/Run-Sheet.png" id="7_5pp5w"]
+[ext_resource type="Resource" uid="uid://dc4gcqulduu3a" path="res://Resources/StateMachine/States/Enemy/PigBeginChargeState.tres" id="7_4402d"]
+[ext_resource type="Resource" uid="uid://bqyhxg211k2pj" path="res://Resources/StateMachine/States/Enemy/PigChargeAttackState.tres" id="8_0x1pq"]
+[ext_resource type="Texture2D" uid="uid://bmlmdqvq8qjel" path="res://Assets/Tiles/AngryEpxression.png" id="12_yo147"]
 
 [sub_resource type="Resource" id="Resource_6qgph"]
 script = ExtResource("4_o4elo")
@@ -24,12 +27,94 @@ script = ExtResource("4_5pp5w")
 States = Dictionary[int, ExtResource("3_tq8x3")]({
 6: SubResource("Resource_6qgph"),
 7: SubResource("Resource_4402d"),
-8: ExtResource("6_6qgph")
+8: ExtResource("6_6qgph"),
+9: ExtResource("7_4402d"),
+10: ExtResource("8_0x1pq")
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pp5w"]
-size = Vector2(23, 21)
+size = Vector2(25, 21)
+
+[sub_resource type="Animation" id="Animation_0x1pq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AngryEpxression:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yo147"]
+resource_name = "anger"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_o4elo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AngryEpxression:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_nspvf"]
 resource_name = "idle"
@@ -195,10 +280,15 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6qgph"]
 _data = {
+&"RESET": SubResource("Animation_0x1pq"),
+&"anger": SubResource("Animation_yo147"),
 &"idle": SubResource("Animation_nspvf"),
 &"run": SubResource("Animation_6qgph"),
 &"walk": SubResource("Animation_4402d")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yo147"]
+animation = &"anger"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pp5w"]
 animation = &"idle"
@@ -216,22 +306,32 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yo147"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0x1pq"]
-states/idle/node = SubResource("AnimationNodeAnimation_5pp5w")
-states/idle/position = Vector2(388.8, 50.8)
-states/run/node = SubResource("AnimationNodeAnimation_o4elo")
-states/run/position = Vector2(411.2, 126)
-states/walk/node = SubResource("AnimationNodeAnimation_nspvf")
-states/walk/position = Vector2(491.2, 60.4)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_6qgph"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_4402d"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_yo147")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0x1pq"]
 
-[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "Sprite2D", "AnimationTree") instance=ExtResource("1_qi8uk")]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0x1pq"]
+states/anger/node = SubResource("AnimationNodeAnimation_yo147")
+states/anger/position = Vector2(399.68, 6.79999)
+states/idle/node = SubResource("AnimationNodeAnimation_5pp5w")
+states/idle/position = Vector2(376.8, 90.8)
+states/run/node = SubResource("AnimationNodeAnimation_o4elo")
+states/run/position = Vector2(399.2, 166)
+states/walk/node = SubResource("AnimationNodeAnimation_nspvf")
+states/walk/position = Vector2(479.2, 100.4)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_6qgph"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_4402d"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_yo147"), "idle", "anger", SubResource("AnimationNodeStateMachineTransition_0x1pq")]
+graph_offset = Vector2(0, -84.2999)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgph"]
+
+[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite", "Sprite2D", "AnimationTree") instance=ExtResource("1_qi8uk")]
+position = Vector2(1, 0)
 scale = Vector2(-1, 1)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_4b10j")
 WallDetection = NodePath("WallCheck")
 FloorDetection = NodePath("FloorCheck")
+VisionShapeCast = NodePath("VisionShapeCast")
+ExpressionSprite = NodePath("AngryEpxression")
 StateMachine = SubResource("Resource_nspvf")
 Sprite2D = NodePath("Sprite2D")
 AnimationTree = NodePath("AnimationTree")
@@ -239,10 +339,11 @@ AnimationTree = NodePath("AnimationTree")
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("5_o4elo")
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(-1.5, 5.5)
+visible = false
+position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_5pp5w")
 
 [node name="AnimationPlayer" parent="." index="2"]
@@ -266,3 +367,16 @@ position = Vector2(-14, 16)
 target_position = Vector2(0, 9)
 collision_mask = 2
 hit_from_inside = true
+
+[node name="VisionShapeCast" type="ShapeCast2D" parent="." index="6"]
+visible = false
+enabled = false
+shape = SubResource("RectangleShape2D_6qgph")
+target_position = Vector2(-100, 0)
+max_results = 1
+
+[node name="AngryEpxression" type="Sprite2D" parent="." index="7"]
+visible = false
+position = Vector2(-8.75673, 2.24327)
+scale = Vector2(0.255295, 0.255295)
+texture = ExtResource("12_yo147")

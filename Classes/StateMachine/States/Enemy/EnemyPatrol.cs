@@ -1,14 +1,17 @@
 using Godot;
 using System;
 
+public enum DirectionEnum
+{
+    Left,
+    Right,
+}
+
 [GlobalClass]
-public partial class EnemyPatrol : State
+public partial class EnemyPatrol : MoveState
 {
     //new is required because it hides the original Parent variable
     private new Enemy Parent => base.Parent as Enemy;
-    
-    //1 = Right | -1 = Left
-    private int _direction = 1;
     
     [Export]
     public Vector2 WallDetectionRightPos { get; set; }
@@ -21,41 +24,58 @@ public partial class EnemyPatrol : State
     public Vector2 FloorDetectionLeftPos { get; set; }
     
     [Export]
+    public Vector2 ExpressionRightPos { get; set; }
+    [Export]
+    public Vector2 ExpressionLeftPos { get; set; }
+    
+    [Export]
     public float WallDetectionLength { get; set; }
+
+    [Export] private DirectionEnum InitialDirection;
     
     public override void Enter(State PreviousState = null)
     {
-        base.Enter(PreviousState);
         if (Parent is Pig parent)
         {
-            
+            parent.VisionShapeCast.Enabled = true;
         }
         
         Parent.AnimationStateMachine.Travel("walk");
+
+        if (InitialDirection == DirectionEnum.Left)
+        {
+            Direction = Vector2.Left;
+        }else if (InitialDirection == DirectionEnum.Right)
+        {
+            Direction = Vector2.Right;
+        }
     }
     
     public override void PhysicsUpdate(double delta)
     {
-        base.PhysicsUpdate(delta);
         if (!Parent.IsOnFloor())
         {
             Parent.StateMachine.ChangeState(StateType.EnemyFall);
         }
 
-        if (_direction >= 1)
+        if (Direction.X >= 0.1)
         {
             Parent.Sprite2D.FlipH = false;
         }
-        else
+        else if (Direction.X <= -0.1)
         {
             Parent.Sprite2D.FlipH = true;
         }
         
-        Parent.Velocity = new Vector2(100*_direction, 0);
+        base.PhysicsUpdate(delta);
         
-        Parent.MoveAndSlide();
         if (Parent is Pig parent)
         {
+            if (parent.VisionShapeCast.IsColliding())
+            {
+                parent.StateMachine.ChangeState(StateType.EnemyBeginCharge);
+            }
+            
             if (parent.WallDetection.IsColliding())
             {
                 ChangeDirection();
@@ -70,22 +90,26 @@ public partial class EnemyPatrol : State
 
     private void ChangeDirection()
     {
-        _direction *= -1;
+        Direction.X *= -1;
         if (Parent is Pig parent)
         {
             Vector2 currentwallDetectionPosition = parent.WallDetection.TargetPosition;
             Vector2 newWallDetectionPosition = new Vector2(currentwallDetectionPosition.X * -1, 0);
             parent.WallDetection.TargetPosition = newWallDetectionPosition;
+
+            parent.VisionShapeCast.TargetPosition = new Vector2(parent.VisionShapeCast.TargetPosition.X * -1,0);
             
-            if (_direction == 1)
+            if (Direction.X >= 0.1)
             {
                 parent.WallDetection.Position = WallDetectionRightPos;
                 parent.FloorDetection.Position = FloorDetectionRightPos;
+                parent.ExpressionSprite.Position = ExpressionRightPos;
             }
-            else if (_direction == -1)
+            else if (Direction.X <= -0.1)
             {
                 parent.WallDetection.Position = WallDetectionLeftPos;
                 parent.FloorDetection.Position = FloorDetectionLeftPos;
+                parent.ExpressionSprite.Position = ExpressionLeftPos;
             }    
         }
     }

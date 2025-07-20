@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyBeginChase" load_steps=2 format=3 uid="uid://dc4gcqulduu3a"]
+
+[ext_resource type="Script" uid="uid://0f3lnneb0cma" path="res://Classes/StateMachine/States/Enemy/EnemyBeginChase.cs" id="1_ssx6j"]
+
+[resource]
+script = ExtResource("1_ssx6j")
+metadata/_custom_type_script = "uid://0f3lnneb0cma"

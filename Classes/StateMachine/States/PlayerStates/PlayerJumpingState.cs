@@ -10,8 +10,6 @@ public partial class PlayerJumpingState : State
     
     public override async void Enter(State PreviousState)
     {
-        base.Enter();
-
         CanCheckFloor = false;
         
         velocity = Parent.Velocity;

@@ -646,6 +646,7 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_yjsus")
 
 [node name="Main" type="Node2D"]
+position = Vector2(1, 0)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(1, 0)
@@ -658,7 +659,7 @@ tile_map_data = PackedByteArray("AAAVAAQAAQABAAAAAAAVAAUAAQABAAEAAAAVAAYAAQABAAI
 tile_set = SubResource("TileSet_u872a")
 
 [node name="Pig" parent="." instance=ExtResource("3_u872a")]
-position = Vector2(243, 81)
+position = Vector2(70, 78)
 
 [node name="Player" parent="." instance=ExtResource("2_yjsus")]
 position = Vector2(126, 77)

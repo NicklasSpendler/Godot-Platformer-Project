@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyCharge" load_steps=2 format=3 uid="uid://bqyhxg211k2pj"]
+
+[ext_resource type="Script" uid="uid://dsyn22k1ymnm2" path="res://Classes/StateMachine/States/Enemy/EnemyCharge.cs" id="1_nvmuv"]
+
+[resource]
+script = ExtResource("1_nvmuv")
+metadata/_custom_type_script = "uid://dsyn22k1ymnm2"

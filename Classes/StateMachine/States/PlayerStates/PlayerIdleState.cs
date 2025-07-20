@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class PlayerIdleState : State
+public partial class PlayerIdleState : MoveState
 {
     private new Player Parent => base.Parent as Player;
     
@@ -30,8 +30,10 @@ public partial class PlayerIdleState : State
             StateMachine.ChangeState(StateType.PlayerRun);
         }
         
-        Parent.HandleMovementInput(delta);
-        Parent.MoveAndSlide();
+        Direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        
+        base.PhysicsUpdate(delta);
+        
 
         if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
         {
@@ -45,6 +47,11 @@ public partial class PlayerIdleState : State
             {
                 Parent.AnimationStateMachine.Travel("idle");
             }
+        }
+
+        if (!Parent.IsOnFloor())
+        {
+            Parent.StateMachine.ChangeState(StateType.PlayerFall);
         }
         
     }

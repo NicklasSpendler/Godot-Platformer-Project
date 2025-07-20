@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class PlayerRunningState : State
+public partial class PlayerRunningState : MoveState
 {
     private new Player Parent => base.Parent as Player;
     
@@ -43,20 +43,10 @@ public partial class PlayerRunningState : State
 
     public override void PhysicsUpdate(double delta)
     {
+        
+        Direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        
         base.PhysicsUpdate(delta);
-        
-        if (Mathf.Abs(Parent.Velocity.X) < 0.1 && Parent.IsOnFloor())
-        {
-            StateMachine.ChangeState(StateType.PlayerIdle);
-        }
-
-        if (!Parent.IsOnFloor())
-        {
-            StateMachine.ChangeState(StateType.PlayerFall);
-        }
-        
-        Parent.HandleMovementInput(delta);
-        Parent.HandleMovement(delta);
         
         if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
         {
@@ -70,6 +60,16 @@ public partial class PlayerRunningState : State
             {
                 Parent.AnimationStateMachine.Travel("run");
             }
+        }
+
+        if (Parent.Velocity.Length() <= 0)
+        {
+            Parent.StateMachine.ChangeState(StateType.PlayerIdle);
+        }
+        
+        if (!Parent.IsOnFloor())
+        {
+            Parent.StateMachine.ChangeState(StateType.PlayerFall);
         }
     }
     

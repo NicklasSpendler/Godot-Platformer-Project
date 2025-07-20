@@ -10,8 +10,6 @@ public partial class EnemyFall : State
     
     public override void Enter(State PreviousState = null)
     {
-        base.Enter(PreviousState);
-        
         Parent.AnimationStateMachine.Travel("idle");
 
         velocity = Parent.Velocity;

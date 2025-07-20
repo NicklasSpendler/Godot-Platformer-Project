@@ -15,8 +15,6 @@ public partial class PlayerAttackState : State
     
     public override void Enter(State PreviousState = null)
     {
-        base.Enter(PreviousState);
-        
         Parent.AnimationStateMachine.Travel(_attackAnimation);
 
         Parent.AnimationTree.AnimationFinished += OnAnimationFinished;
@@ -51,6 +49,7 @@ public partial class PlayerAttackState : State
         base.PhysicsUpdate(delta);
         velocity.X = Mathf.MoveToward(Parent.Velocity.X, 0, Parent.Friction * (float)delta);
         Parent.Velocity = velocity;
-        Parent.HandleMovement(delta);
+
+        Parent.MoveAndSlide();
     }
 }

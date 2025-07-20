@@ -11,7 +11,9 @@ public enum StateType
     PlayerFall,
     EnemyIdle,
     EnemyFall,
-    EnemyPatrol
+    EnemyPatrol,
+    EnemyBeginCharge,
+    EnemyCharge,
 };
 
 [GlobalClass]
