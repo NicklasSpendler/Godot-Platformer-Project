@@ -4,7 +4,8 @@ using Godot.Collections;
 
 public enum ComponentName
 {
-    HealthComponent
+    HealthComponent,
+    DamageComponent,
 };
 
 [GlobalClass]

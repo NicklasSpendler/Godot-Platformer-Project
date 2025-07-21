@@ -13,9 +13,11 @@ public partial class Enemy : CharacterBody2D
 	[Export] public float JumpVelocity = -400.0f;
 	
 	[ExportCategory("StateMachine")]
-	[Export] public StateMachine StateMachine;
+	[Export]
+	public StateMachine StateMachine;
 
-	[ExportCategory("Components")] [Export]
+	[ExportCategory("Components")]
+	[Export]
 	public Composition Components;
 	
 	[ExportCategory("Nodes")]

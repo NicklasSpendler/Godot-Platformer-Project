@@ -32,12 +32,12 @@ public partial class PlayerRunningState : MoveState
         if (Parent.Velocity.X > 0)
         {
             Parent.Sprite2D.FlipH = false;
-            Parent.Hurtbox.Position = RightHurtboxPosition;
+            //Parent.Hurtbox.Position = RightHurtboxPosition;
         }
         else if (Parent.Velocity.X < 0)
         {
             Parent.Sprite2D.FlipH = true;
-            Parent.Hurtbox.Position = LeftHurtboxPosition;
+            //Parent.Hurtbox.Position = LeftHurtboxPosition;
         }
     }
 

@@ -1,64 +1,69 @@
-[gd_scene load_steps=55 format=3 uid="uid://bqies6su7v02t"]
+[gd_scene load_steps=53 format=3 uid="uid://bqies6su7v02t"]
 
 [ext_resource type="Texture2D" uid="uid://dugate784k1tl" path="res://Assets/Characters/Player/Idle/Idle-Sheet.png" id="1_40svl"]
 [ext_resource type="Texture2D" uid="uid://b6yf4rl1yrgmn" path="res://Assets/Characters/Player/Attack-01/Attack-01-Sheet.png" id="1_al8ar"]
 [ext_resource type="Script" uid="uid://bod6ydxf3yx13" path="res://Scenes/Characters/Player.cs" id="1_gy20a"]
 [ext_resource type="Texture2D" uid="uid://6ttl4ddfo0tq" path="res://Assets/Characters/Player/Run/Run-Sheet.png" id="2_al8ar"]
-[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="2_cqrjx"]
-[ext_resource type="Script" uid="uid://f6bqe0edoyoy" path="res://Classes/StateMachine/States/State.cs" id="2_khnq4"]
-[ext_resource type="Script" uid="uid://djti1wwrkwber" path="res://Classes/StateMachine/States/PlayerStates/PlayerIdleState.cs" id="3_01b8d"]
-[ext_resource type="Resource" uid="uid://eveb8k441oqk" path="res://Resources/StateMachine/States/Player/PlayerRunningState.tres" id="5_h1n2f"]
-[ext_resource type="Resource" uid="uid://bnhgh4dinf364" path="res://Resources/StateMachine/States/Player/PlayerAttackState1.tres" id="6_xccyk"]
-[ext_resource type="Script" uid="uid://bue7wqkyyb2ll" path="res://Classes/StateMachine/States/PlayerStates/PlayerJumpingState.cs" id="7_cueqf"]
-[ext_resource type="Resource" uid="uid://bsywyafn7vrw6" path="res://Resources/StateMachine/States/Player/PlayerAttackState2.tres" id="7_h1n2f"]
-[ext_resource type="Script" uid="uid://ck62lpeegp780" path="res://Classes/StateMachine/States/PlayerStates/PlayerFallingState.cs" id="8_xccyk"]
+[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="2_gdgf0"]
+[ext_resource type="Script" uid="uid://bue7wqkyyb2ll" path="res://Classes/StateMachine/States/PlayerStates/PlayerJumpingState.cs" id="2_xccyk"]
+[ext_resource type="Script" uid="uid://be1pfdmjmm3x6" path="res://Classes/StateMachine/States/PlayerStates/PlayerRunningState.cs" id="3_h1n2f"]
+[ext_resource type="Script" uid="uid://bittrm3io4o8" path="res://Classes/StateMachine/States/PlayerStates/PlayerAttackState.cs" id="4_dxpk4"]
+[ext_resource type="Script" uid="uid://ck62lpeegp780" path="res://Classes/StateMachine/States/PlayerStates/PlayerFallingState.cs" id="5_15c3i"]
+[ext_resource type="Script" uid="uid://djti1wwrkwber" path="res://Classes/StateMachine/States/PlayerStates/PlayerIdleState.cs" id="6_yt1oc"]
+[ext_resource type="Resource" uid="uid://bq21cm4e58bnb" path="res://Resources/Composition/Compositions/playerComposition.tres" id="8_xccyk"]
 [ext_resource type="Texture2D" uid="uid://dbh4dcykkoj5" path="res://Assets/Characters/Player/Jump-Start/Jump-Start-Sheet.png" id="8_xo8ps"]
-[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="10_15c3i"]
-[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="11_yt1oc"]
+[ext_resource type="Script" uid="uid://b1tg302276y2" path="res://Scenes/Characters/test.cs" id="14_h1n2f"]
 [ext_resource type="Texture2D" uid="uid://b0efyiv0cgeb3" path="res://Assets/Characters/Player/Jumlp-All/Jump-All-Sheet.png" id="14_xccyk"]
-[ext_resource type="PackedScene" uid="uid://b3njynm4arsww" path="res://Scenes/Characters/hurtbox.tscn" id="15_h1n2f"]
 
-[sub_resource type="Resource" id="Resource_xccyk"]
-script = ExtResource("3_01b8d")
+[sub_resource type="Resource" id="Resource_jnx77"]
+script = ExtResource("2_xccyk")
+metadata/_custom_type_script = "uid://bue7wqkyyb2ll"
+
+[sub_resource type="Resource" id="Resource_hy8lp"]
+script = ExtResource("3_h1n2f")
+RightHurtboxPosition = Vector2(0, 0)
+LeftHurtboxPosition = Vector2(0, 0)
+MaxSpeed = 300.0
+Acceleration = 800.0
+JumpVelocity = -400.0
+Friction = 1000.0
+metadata/_custom_type_script = "uid://be1pfdmjmm3x6"
+
+[sub_resource type="Resource" id="Resource_uxymp"]
+script = ExtResource("4_dxpk4")
+_attackAnimation = &"attack1"
+_nextAttackState = 4
+metadata/_custom_type_script = "uid://bittrm3io4o8"
+
+[sub_resource type="Resource" id="Resource_fepmq"]
+script = ExtResource("4_dxpk4")
+_attackAnimation = &"attack2"
+_nextAttackState = 3
+metadata/_custom_type_script = "uid://bittrm3io4o8"
+
+[sub_resource type="Resource" id="Resource_ddhxa"]
+script = ExtResource("5_15c3i")
+metadata/_custom_type_script = "uid://ck62lpeegp780"
+
+[sub_resource type="Resource" id="Resource_3k74t"]
+script = ExtResource("6_yt1oc")
 MaxSpeed = 300.0
 Acceleration = 800.0
 JumpVelocity = -400.0
 Friction = 1000.0
 metadata/_custom_type_script = "uid://djti1wwrkwber"
 
-[sub_resource type="Resource" id="Resource_yt1oc"]
-script = ExtResource("7_cueqf")
-metadata/_custom_type_script = "uid://bue7wqkyyb2ll"
-
-[sub_resource type="Resource" id="Resource_01b8d"]
-script = ExtResource("8_xccyk")
-metadata/_custom_type_script = "uid://ck62lpeegp780"
-
-[sub_resource type="Resource" id="Resource_gdgf0"]
-resource_local_to_scene = true
-script = ExtResource("2_cqrjx")
-States = Dictionary[int, ExtResource("2_khnq4")]({
-0: SubResource("Resource_xccyk"),
-1: SubResource("Resource_yt1oc"),
-2: ExtResource("5_h1n2f"),
-3: ExtResource("6_xccyk"),
-4: ExtResource("7_h1n2f"),
-5: SubResource("Resource_01b8d")
+[sub_resource type="Resource" id="Resource_fcmex"]
+script = ExtResource("2_gdgf0")
+States = Dictionary[int, Object]({
+0: SubResource("Resource_3k74t"),
+1: SubResource("Resource_jnx77"),
+2: SubResource("Resource_hy8lp"),
+3: SubResource("Resource_uxymp"),
+4: SubResource("Resource_fepmq"),
+5: SubResource("Resource_ddhxa")
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
-
-[sub_resource type="Resource" id="Resource_15c3i"]
-script = ExtResource("10_15c3i")
-_maxHealth = 100.0
-metadata/_custom_type_script = "uid://c73ryrqypu4ca"
-
-[sub_resource type="Resource" id="Resource_jnx77"]
-resource_local_to_scene = true
-script = ExtResource("11_yt1oc")
-Components = Dictionary[int, Object]({
-0: SubResource("Resource_15c3i")
-})
-metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_15c3i"]
 height = 48.0
@@ -113,18 +118,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hurtbox/CollisionBox:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_cueqf"]
 resource_name = "attack1"
@@ -178,18 +171,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hurtbox/CollisionBox:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="Animation" id="Animation_01b8d"]
 resource_name = "attack2"
@@ -242,18 +223,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hurtbox/CollisionBox:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_gdgf0"]
@@ -613,18 +582,17 @@ states/run/position = Vector2(366.159, -12.7378)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_hy8lp"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_uxymp"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_xccyk"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_dxpk4"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_15c3i"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_yt1oc"), "attack2", "attack1", SubResource("AnimationNodeStateMachineTransition_jnx77"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_fepmq"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_ddhxa"), "jump", "jump_falling", SubResource("AnimationNodeStateMachineTransition_3k74t"), "jump_falling", "jump_landing", SubResource("AnimationNodeStateMachineTransition_v8iml"), "jump_landing", "idle", SubResource("AnimationNodeStateMachineTransition_h1n2f")]
 graph_offset = Vector2(0, -85.9378)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxpk4"]
-size = Vector2(49, 69.75)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15c3i"]
+size = Vector2(13, 45)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "AnimationTree", "Sprite2D", "Hurtbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "AnimationTree", "Sprite2D")]
 collision_mask = 2
 script = ExtResource("1_gy20a")
-StateMachine = SubResource("Resource_gdgf0")
-Components = SubResource("Resource_jnx77")
+StateMachine = SubResource("Resource_fcmex")
+Components = ExtResource("8_xccyk")
 AnimationPlayer = NodePath("AnimationPlayer")
 AnimationTree = NodePath("AnimationTree")
 Sprite2D = NodePath("Sprite2D")
-Hurtbox = NodePath("Hurtbox/CollisionBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_40svl")
@@ -647,11 +615,12 @@ parameters/conditions/attack1 = false
 parameters/conditions/attack2 = false
 parameters/conditions/idle = false
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("_parent") instance=ExtResource("15_h1n2f")]
-_parent = NodePath("..")
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("14_h1n2f")
+Composition = ExtResource("8_xccyk")
 
-[node name="CollisionBox" parent="Hurtbox" index="0"]
-position = Vector2(14, -3.125)
-shape = SubResource("RectangleShape2D_dxpk4")
-
-[editable path="Hurtbox"]
+[node name="HurtBoxCollision" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_15c3i")
+debug_color = Color(0.999335, 0, 0.116394, 0.42)

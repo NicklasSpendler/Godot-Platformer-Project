@@ -1,51 +1,84 @@
-[gd_scene load_steps=38 format=3 uid="uid://daouw1odpflyw"]
+[gd_scene load_steps=42 format=3 uid="uid://daouw1odpflyw"]
 
 [ext_resource type="PackedScene" uid="uid://hdoq8arepg6a" path="res://Scenes/Characters/Enemies/enemy.tscn" id="1_qi8uk"]
 [ext_resource type="Script" uid="uid://bmc7kn0foijcv" path="res://Scenes/Characters/Enemies/Pig.cs" id="2_4b10j"]
-[ext_resource type="Script" uid="uid://f6bqe0edoyoy" path="res://Classes/StateMachine/States/State.cs" id="3_tq8x3"]
-[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="4_5pp5w"]
-[ext_resource type="Script" uid="uid://cm62k78phpqba" path="res://Classes/StateMachine/States/Enemy/EnemyIdle.cs" id="4_o4elo"]
-[ext_resource type="Script" uid="uid://t4c5al4dosdn" path="res://Classes/StateMachine/States/Enemy/EnemyFall.cs" id="5_nspvf"]
+[ext_resource type="Script" uid="uid://cm62k78phpqba" path="res://Classes/StateMachine/States/Enemy/EnemyIdle.cs" id="3_yo147"]
+[ext_resource type="Script" uid="uid://t4c5al4dosdn" path="res://Classes/StateMachine/States/Enemy/EnemyFall.cs" id="4_0x1pq"]
+[ext_resource type="Script" uid="uid://bcptdpj61crgj" path="res://Classes/StateMachine/States/Enemy/EnemyPatrol.cs" id="5_0uceq"]
 [ext_resource type="Texture2D" uid="uid://klw0ebeshwos" path="res://Assets/Characters/Mobs/Boar/Idle/Idle-Sheet.png" id="5_o4elo"]
-[ext_resource type="Resource" uid="uid://dma1itw3j64ab" path="res://Resources/StateMachine/States/Enemy/PigPatrolState.tres" id="6_6qgph"]
+[ext_resource type="Script" uid="uid://0f3lnneb0cma" path="res://Classes/StateMachine/States/Enemy/EnemyBeginChase.cs" id="6_1lvh4"]
 [ext_resource type="Texture2D" uid="uid://4leu1pmgm35w" path="res://Assets/Characters/Mobs/Boar/Walk/Walk-Base-Sheet.png" id="6_tq8x3"]
 [ext_resource type="Texture2D" uid="uid://blhaxuuhyoy04" path="res://Assets/Characters/Mobs/Boar/Run/Run-Sheet.png" id="7_5pp5w"]
-[ext_resource type="Resource" uid="uid://dc4gcqulduu3a" path="res://Resources/StateMachine/States/Enemy/PigBeginChargeState.tres" id="7_4402d"]
-[ext_resource type="Resource" uid="uid://bqyhxg211k2pj" path="res://Resources/StateMachine/States/Enemy/PigChargeAttackState.tres" id="8_0x1pq"]
-[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="10_1lvh4"]
-[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="11_tmqbw"]
+[ext_resource type="Script" uid="uid://dsyn22k1ymnm2" path="res://Classes/StateMachine/States/Enemy/EnemyCharge.cs" id="7_tmqbw"]
+[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="8_bhtky"]
+[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="9_0uceq"]
+[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="10_1lvh4"]
+[ext_resource type="Script" uid="uid://bug5lqqb1qc26" path="res://Classes/Composition/Components/DamageComponent.cs" id="10_tmqbw"]
 [ext_resource type="Texture2D" uid="uid://bmlmdqvq8qjel" path="res://Assets/Tiles/AngryEpxression.png" id="12_yo147"]
 
-[sub_resource type="Resource" id="Resource_6qgph"]
-script = ExtResource("4_o4elo")
+[sub_resource type="Resource" id="Resource_du03b"]
+script = ExtResource("3_yo147")
 metadata/_custom_type_script = "uid://cm62k78phpqba"
 
-[sub_resource type="Resource" id="Resource_4402d"]
-script = ExtResource("5_nspvf")
+[sub_resource type="Resource" id="Resource_hdcbu"]
+script = ExtResource("4_0x1pq")
 metadata/_custom_type_script = "uid://t4c5al4dosdn"
 
-[sub_resource type="Resource" id="Resource_nspvf"]
-resource_local_to_scene = true
-script = ExtResource("4_5pp5w")
-States = Dictionary[int, ExtResource("3_tq8x3")]({
-6: SubResource("Resource_6qgph"),
-7: SubResource("Resource_4402d"),
-8: ExtResource("6_6qgph"),
-9: ExtResource("7_4402d"),
-10: ExtResource("8_0x1pq")
+[sub_resource type="Resource" id="Resource_s3fik"]
+script = ExtResource("5_0uceq")
+WallDetectionRightPos = Vector2(14, 6)
+FloorDetectionRightPos = Vector2(13, 15)
+WallDetectionLeftPos = Vector2(-14, 6)
+FloorDetectionLeftPos = Vector2(-13, 15)
+ExpressionRightPos = Vector2(8, 1)
+ExpressionLeftPos = Vector2(-8, 1)
+WallDetectionLength = 8.0
+InitialDirection = 1
+MaxSpeed = 100.0
+Acceleration = 800.0
+JumpVelocity = -400.0
+Friction = 1000.0
+metadata/_custom_type_script = "uid://bcptdpj61crgj"
+
+[sub_resource type="Resource" id="Resource_h7yfu"]
+script = ExtResource("6_1lvh4")
+metadata/_custom_type_script = "uid://0f3lnneb0cma"
+
+[sub_resource type="Resource" id="Resource_yhlep"]
+script = ExtResource("7_tmqbw")
+_chargeTime = 1.5
+MaxSpeed = 300.0
+Acceleration = 800.0
+JumpVelocity = -400.0
+Friction = 1000.0
+metadata/_custom_type_script = "uid://dsyn22k1ymnm2"
+
+[sub_resource type="Resource" id="Resource_0b01y"]
+script = ExtResource("8_bhtky")
+States = Dictionary[int, Object]({
+6: SubResource("Resource_du03b"),
+7: SubResource("Resource_hdcbu"),
+8: SubResource("Resource_s3fik"),
+9: SubResource("Resource_h7yfu"),
+10: SubResource("Resource_yhlep")
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
 
-[sub_resource type="Resource" id="Resource_1lvh4"]
-script = ExtResource("10_1lvh4")
-_maxHealth = 100.0
+[sub_resource type="Resource" id="Resource_tmqbw"]
+script = ExtResource("9_0uceq")
+MaxHealth = 100.0
 metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 
-[sub_resource type="Resource" id="Resource_tmqbw"]
-resource_local_to_scene = true
-script = ExtResource("11_tmqbw")
+[sub_resource type="Resource" id="Resource_j3cc3"]
+script = ExtResource("10_tmqbw")
+DamageAmount = 10.0
+metadata/_custom_type_script = "uid://bug5lqqb1qc26"
+
+[sub_resource type="Resource" id="Resource_bhtky"]
+script = ExtResource("10_1lvh4")
 Components = Dictionary[int, Object]({
-0: SubResource("Resource_1lvh4")
+0: SubResource("Resource_tmqbw"),
+1: SubResource("Resource_j3cc3")
 })
 metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
@@ -338,7 +371,7 @@ graph_offset = Vector2(0, -84.2999)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgph"]
 
-[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite", "Sprite2D", "AnimationTree") instance=ExtResource("1_qi8uk")]
+[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite") instance=ExtResource("1_qi8uk")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_4b10j")
@@ -346,16 +379,13 @@ WallDetection = NodePath("WallCheck")
 FloorDetection = NodePath("FloorCheck")
 VisionShapeCast = NodePath("VisionShapeCast")
 ExpressionSprite = NodePath("AngryEpxression")
-StateMachine = SubResource("Resource_nspvf")
-Components = SubResource("Resource_tmqbw")
-Sprite2D = NodePath("Sprite2D")
-AnimationTree = NodePath("AnimationTree")
+StateMachine = SubResource("Resource_0b01y")
+Components = SubResource("Resource_bhtky")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("5_o4elo")
 flip_h = true
 hframes = 4
-frame = 3
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(-0.5, 5.5)
@@ -373,12 +403,12 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="WallCheck" type="RayCast2D" parent="." index="4"]
 position = Vector2(14, 6)
-target_position = Vector2(-8, 0)
+target_position = Vector2(8, 0)
 collision_mask = 2
 hit_from_inside = true
 
 [node name="FloorCheck" type="RayCast2D" parent="." index="5"]
-position = Vector2(-14, 16)
+position = Vector2(13, 15)
 target_position = Vector2(0, 9)
 collision_mask = 2
 hit_from_inside = true
@@ -391,6 +421,6 @@ max_results = 1
 
 [node name="AngryEpxression" type="Sprite2D" parent="." index="7"]
 visible = false
-position = Vector2(-8.75673, 2.24327)
+position = Vector2(-8, 1)
 scale = Vector2(0.255295, 0.255295)
 texture = ExtResource("12_yo147")

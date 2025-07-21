@@ -32,8 +32,6 @@ public partial class Player : CharacterBody2D
 		
 	[Export] public Sprite2D Sprite2D;
 	
-	[Export] public CollisionShape2D Hurtbox;
-	
 	Vector2 velocity = Vector2.Zero;
 
 	public override void _Ready()
@@ -73,7 +71,6 @@ public partial class Player : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		GD.Print(StateMachine);
 		StateMachine.CurrentState.Update(delta);
 	}
 

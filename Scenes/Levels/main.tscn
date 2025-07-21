@@ -1,23 +1,8 @@
-[gd_scene load_steps=32 format=4 uid="uid://bnc63pkj8os11"]
+[gd_scene load_steps=6 format=4 uid="uid://bnc63pkj8os11"]
 
 [ext_resource type="Texture2D" uid="uid://crafcbi4certx" path="res://Assets/Tiles/Tiles.png" id="1_s0gyx"]
 [ext_resource type="PackedScene" uid="uid://bqies6su7v02t" path="res://Scenes/Characters/player.tscn" id="2_yjsus"]
-[ext_resource type="Script" uid="uid://f6bqe0edoyoy" path="res://Classes/StateMachine/States/State.cs" id="3_pgcb0"]
 [ext_resource type="PackedScene" uid="uid://daouw1odpflyw" path="res://Scenes/Characters/Enemies/pig.tscn" id="3_u872a"]
-[ext_resource type="Script" uid="uid://cm62k78phpqba" path="res://Classes/StateMachine/States/Enemy/EnemyIdle.cs" id="4_hlgat"]
-[ext_resource type="Script" uid="uid://t4c5al4dosdn" path="res://Classes/StateMachine/States/Enemy/EnemyFall.cs" id="5_d3pra"]
-[ext_resource type="Resource" uid="uid://dma1itw3j64ab" path="res://Resources/StateMachine/States/Enemy/PigPatrolState.tres" id="6_rrvv5"]
-[ext_resource type="Resource" uid="uid://dc4gcqulduu3a" path="res://Resources/StateMachine/States/Enemy/PigBeginChargeState.tres" id="7_g8fqy"]
-[ext_resource type="Resource" uid="uid://bqyhxg211k2pj" path="res://Resources/StateMachine/States/Enemy/PigChargeAttackState.tres" id="8_0w7p8"]
-[ext_resource type="Script" uid="uid://cvc4ijjv2d4i3" path="res://Classes/StateMachine/StateMachine.cs" id="9_8rt6e"]
-[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="10_ksskw"]
-[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="11_2tpv6"]
-[ext_resource type="Script" uid="uid://djti1wwrkwber" path="res://Classes/StateMachine/States/PlayerStates/PlayerIdleState.cs" id="13_wnekd"]
-[ext_resource type="Script" uid="uid://bue7wqkyyb2ll" path="res://Classes/StateMachine/States/PlayerStates/PlayerJumpingState.cs" id="14_56s34"]
-[ext_resource type="Resource" uid="uid://eveb8k441oqk" path="res://Resources/StateMachine/States/Player/PlayerRunningState.tres" id="15_v8chn"]
-[ext_resource type="Resource" uid="uid://bnhgh4dinf364" path="res://Resources/StateMachine/States/Player/PlayerAttackState1.tres" id="16_3bctx"]
-[ext_resource type="Resource" uid="uid://bsywyafn7vrw6" path="res://Resources/StateMachine/States/Player/PlayerAttackState2.tres" id="17_tik65"]
-[ext_resource type="Script" uid="uid://ck62lpeegp780" path="res://Classes/StateMachine/States/PlayerStates/PlayerFallingState.cs" id="18_3apm3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjsus"]
 texture = ExtResource("1_s0gyx")
@@ -660,81 +645,6 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_yjsus")
 
-[sub_resource type="Resource" id="Resource_xccyk"]
-script = ExtResource("13_wnekd")
-MaxSpeed = 300.0
-Acceleration = 800.0
-JumpVelocity = -400.0
-Friction = 1000.0
-metadata/_custom_type_script = "uid://djti1wwrkwber"
-
-[sub_resource type="Resource" id="Resource_yt1oc"]
-script = ExtResource("14_56s34")
-metadata/_custom_type_script = "uid://bue7wqkyyb2ll"
-
-[sub_resource type="Resource" id="Resource_01b8d"]
-script = ExtResource("18_3apm3")
-metadata/_custom_type_script = "uid://ck62lpeegp780"
-
-[sub_resource type="Resource" id="Resource_ay6nb"]
-resource_local_to_scene = true
-script = ExtResource("9_8rt6e")
-States = Dictionary[int, ExtResource("3_pgcb0")]({
-0: SubResource("Resource_xccyk"),
-1: SubResource("Resource_yt1oc"),
-2: ExtResource("15_v8chn"),
-3: ExtResource("16_3bctx"),
-4: ExtResource("17_tik65"),
-5: SubResource("Resource_01b8d")
-})
-metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
-
-[sub_resource type="Resource" id="Resource_15c3i"]
-script = ExtResource("10_ksskw")
-_maxHealth = 100.0
-metadata/_custom_type_script = "uid://c73ryrqypu4ca"
-
-[sub_resource type="Resource" id="Resource_hkc38"]
-resource_local_to_scene = true
-script = ExtResource("11_2tpv6")
-Components = Dictionary[int, Object]({
-0: SubResource("Resource_15c3i")
-})
-metadata/_custom_type_script = "uid://c7rb2ufaownok"
-
-[sub_resource type="Resource" id="Resource_6qgph"]
-script = ExtResource("4_hlgat")
-metadata/_custom_type_script = "uid://cm62k78phpqba"
-
-[sub_resource type="Resource" id="Resource_4402d"]
-script = ExtResource("5_d3pra")
-metadata/_custom_type_script = "uid://t4c5al4dosdn"
-
-[sub_resource type="Resource" id="Resource_pgcb0"]
-resource_local_to_scene = true
-script = ExtResource("9_8rt6e")
-States = Dictionary[int, ExtResource("3_pgcb0")]({
-6: SubResource("Resource_6qgph"),
-7: SubResource("Resource_4402d"),
-8: ExtResource("6_rrvv5"),
-9: ExtResource("7_g8fqy"),
-10: ExtResource("8_0w7p8")
-})
-metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
-
-[sub_resource type="Resource" id="Resource_1lvh4"]
-script = ExtResource("10_ksskw")
-_maxHealth = 100.0
-metadata/_custom_type_script = "uid://c73ryrqypu4ca"
-
-[sub_resource type="Resource" id="Resource_hlgat"]
-resource_local_to_scene = true
-script = ExtResource("11_2tpv6")
-Components = Dictionary[int, Object]({
-0: SubResource("Resource_1lvh4")
-})
-metadata/_custom_type_script = "uid://c7rb2ufaownok"
-
 [node name="Main" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -749,10 +659,6 @@ tile_set = SubResource("TileSet_u872a")
 
 [node name="Player" parent="." instance=ExtResource("2_yjsus")]
 position = Vector2(73, 74)
-StateMachine = SubResource("Resource_ay6nb")
-Components = SubResource("Resource_hkc38")
 
 [node name="Pig" parent="." instance=ExtResource("3_u872a")]
 position = Vector2(199, 75)
-StateMachine = SubResource("Resource_pgcb0")
-Components = SubResource("Resource_hlgat")

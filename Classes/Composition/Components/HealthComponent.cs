@@ -4,23 +4,59 @@ using System;
 [GlobalClass]
 public partial class HealthComponent : Component
 {
-    [Export] private float _maxHealth;
-    private float _health;
+    [Signal]
+    public delegate void HealthChangedEventHandler(float currentHealth);
+    
+    [Export]
+    public float MaxHealth
+    {
+        get => maxHealth;
+        private set
+        {
+            maxHealth = value;
+            if (CurrentHealth > currentHealth)
+            {
+                CurrentHealth = maxHealth;
+                EmitChanged();
+            }
+        }
+    }
+
+    public float CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            currentHealth = value;
+            if (currentHealth <= 0)
+            {
+                hasDied = true;
+            }
+            EmitChanged();
+        }
+    }
+    
+    private float currentHealth;
+    private float maxHealth;
+    private bool hasDied = false;
 
     public override void Initialize()
     {
         base.Initialize();
-        _health = _maxHealth;
+        currentHealth = MaxHealth;
     }
 
     public void TakeDamage(float damage)
     {
-        _health -= damage;
-        _health = Mathf.Clamp(_health, 0, _maxHealth);
+        currentHealth -= damage;
 
-        if (_health <= 0)
+        if (currentHealth <= 0)
         {
             
         }
+        
+        GD.Print(currentHealth);
+        EmitSignal(SignalName.HealthChanged, currentHealth);
     }
 }
