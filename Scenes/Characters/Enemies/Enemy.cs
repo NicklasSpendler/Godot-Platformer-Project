@@ -14,6 +14,9 @@ public partial class Enemy : CharacterBody2D
 	
 	[ExportCategory("StateMachine")]
 	[Export] public StateMachine StateMachine;
+
+	[ExportCategory("Components")] [Export]
+	public Composition Components;
 	
 	[ExportCategory("Nodes")]
 	[Export] public Sprite2D Sprite2D;
@@ -32,7 +35,9 @@ public partial class Enemy : CharacterBody2D
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");
 		
-		StateMachine.Parent = this;
+		StateMachine.InitializeStateMachine(this);
+		
+		Components.InitializeComponents(this);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

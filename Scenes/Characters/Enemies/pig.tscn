@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://daouw1odpflyw"]
+[gd_scene load_steps=38 format=3 uid="uid://daouw1odpflyw"]
 
 [ext_resource type="PackedScene" uid="uid://hdoq8arepg6a" path="res://Scenes/Characters/Enemies/enemy.tscn" id="1_qi8uk"]
 [ext_resource type="Script" uid="uid://bmc7kn0foijcv" path="res://Scenes/Characters/Enemies/Pig.cs" id="2_4b10j"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://blhaxuuhyoy04" path="res://Assets/Characters/Mobs/Boar/Run/Run-Sheet.png" id="7_5pp5w"]
 [ext_resource type="Resource" uid="uid://dc4gcqulduu3a" path="res://Resources/StateMachine/States/Enemy/PigBeginChargeState.tres" id="7_4402d"]
 [ext_resource type="Resource" uid="uid://bqyhxg211k2pj" path="res://Resources/StateMachine/States/Enemy/PigChargeAttackState.tres" id="8_0x1pq"]
+[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="10_1lvh4"]
+[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="11_tmqbw"]
 [ext_resource type="Texture2D" uid="uid://bmlmdqvq8qjel" path="res://Assets/Tiles/AngryEpxression.png" id="12_yo147"]
 
 [sub_resource type="Resource" id="Resource_6qgph"]
@@ -32,6 +34,18 @@ States = Dictionary[int, ExtResource("3_tq8x3")]({
 10: ExtResource("8_0x1pq")
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
+
+[sub_resource type="Resource" id="Resource_bhtky"]
+script = ExtResource("10_1lvh4")
+_maxHealth = 100.0
+metadata/_custom_type_script = "uid://c73ryrqypu4ca"
+
+[sub_resource type="Resource" id="Resource_du03b"]
+script = ExtResource("11_tmqbw")
+Components = Dictionary[int, Object]({
+0: SubResource("Resource_bhtky")
+})
+metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pp5w"]
 size = Vector2(25, 21)
@@ -323,7 +337,6 @@ graph_offset = Vector2(0, -84.2999)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgph"]
 
 [node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite", "Sprite2D", "AnimationTree") instance=ExtResource("1_qi8uk")]
-position = Vector2(1, 0)
 scale = Vector2(-1, 1)
 collision_layer = 4
 collision_mask = 2
@@ -333,13 +346,14 @@ FloorDetection = NodePath("FloorCheck")
 VisionShapeCast = NodePath("VisionShapeCast")
 ExpressionSprite = NodePath("AngryEpxression")
 StateMachine = SubResource("Resource_nspvf")
+Components = SubResource("Resource_du03b")
 Sprite2D = NodePath("Sprite2D")
 AnimationTree = NodePath("AnimationTree")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("5_o4elo")
 hframes = 4
-frame = 3
+frame = 2
 
 [node name="CollisionShape2D" parent="." index="1"]
 visible = false

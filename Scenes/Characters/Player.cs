@@ -20,6 +20,9 @@ public partial class Player : CharacterBody2D
 	[ExportCategory("State Machine")]
 	[Export] public StateMachine StateMachine;
 	
+	[ExportCategory("Components")]
+	[Export] public Composition Components;
+	
 	[ExportCategory("Nodes")]
 	[Export] public AnimationPlayer AnimationPlayer;
 	
@@ -47,9 +50,18 @@ public partial class Player : CharacterBody2D
 			GD.PrintErr("No animation player found!");
 			return;
 		}
+
+		if (Components == null)
+		{
+			GD.PrintErr("No components found!");
+			return;
+		}
+		
+		Components.InitializeComponents(this);
+		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");
 		
-		StateMachine.Parent = this;
+		StateMachine.InitializeStateMachine(this);
 
 		if (IsOnFloor())
 		{
@@ -71,7 +83,6 @@ public partial class Player : CharacterBody2D
 	{
 		base._PhysicsProcess(delta);
 		
-		//velocity = Velocity;
 		
 		StateMachine.CurrentState.PhysicsUpdate(delta);
 	}

@@ -4,8 +4,8 @@ using System;
 [GlobalClass]
 public partial class PlayerAttackState : State
 {
-    [Export] private StateType _nextAttackState;
     [Export] private StringName _attackAnimation;
+    [Export] private StateType _nextAttackState;
     
     private new Player Parent => base.Parent as Player;
     

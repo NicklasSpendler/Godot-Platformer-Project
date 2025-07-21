@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bqies6su7v02t"]
+[gd_scene load_steps=55 format=3 uid="uid://bqies6su7v02t"]
 
 [ext_resource type="Texture2D" uid="uid://dugate784k1tl" path="res://Assets/Characters/Player/Idle/Idle-Sheet.png" id="1_40svl"]
 [ext_resource type="Texture2D" uid="uid://b6yf4rl1yrgmn" path="res://Assets/Characters/Player/Attack-01/Attack-01-Sheet.png" id="1_al8ar"]
@@ -13,6 +13,8 @@
 [ext_resource type="Resource" uid="uid://bsywyafn7vrw6" path="res://Resources/StateMachine/States/Player/PlayerAttackState2.tres" id="7_h1n2f"]
 [ext_resource type="Script" uid="uid://ck62lpeegp780" path="res://Classes/StateMachine/States/PlayerStates/PlayerFallingState.cs" id="8_xccyk"]
 [ext_resource type="Texture2D" uid="uid://dbh4dcykkoj5" path="res://Assets/Characters/Player/Jump-Start/Jump-Start-Sheet.png" id="8_xo8ps"]
+[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="10_15c3i"]
+[ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="11_yt1oc"]
 [ext_resource type="Texture2D" uid="uid://b0efyiv0cgeb3" path="res://Assets/Characters/Player/Jumlp-All/Jump-All-Sheet.png" id="14_xccyk"]
 [ext_resource type="PackedScene" uid="uid://b3njynm4arsww" path="res://Scenes/Characters/hurtbox.tscn" id="15_h1n2f"]
 
@@ -43,6 +45,18 @@ States = Dictionary[int, ExtResource("2_khnq4")]({
 5: SubResource("Resource_01b8d")
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
+
+[sub_resource type="Resource" id="Resource_15c3i"]
+script = ExtResource("10_15c3i")
+_maxHealth = 100.0
+metadata/_custom_type_script = "uid://c73ryrqypu4ca"
+
+[sub_resource type="Resource" id="Resource_hy8lp"]
+script = ExtResource("11_yt1oc")
+Components = Dictionary[int, Object]({
+0: SubResource("Resource_15c3i")
+})
+metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_15c3i"]
 height = 48.0
@@ -604,6 +618,7 @@ size = Vector2(49, 69.75)
 collision_mask = 2
 script = ExtResource("1_gy20a")
 StateMachine = SubResource("Resource_gdgf0")
+Components = SubResource("Resource_hy8lp")
 AnimationPlayer = NodePath("AnimationPlayer")
 AnimationTree = NodePath("AnimationTree")
 Sprite2D = NodePath("Sprite2D")

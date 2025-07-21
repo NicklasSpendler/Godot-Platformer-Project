@@ -19,10 +19,15 @@ public enum StateType
 [GlobalClass]
 public partial class StateMachine : Resource
 {
-    [Export] public Godot.Collections.Dictionary<StateType, State> States = new ();
+    [Export] public Godot.Collections.Dictionary<StateType, State> States;
     public State CurrentState;
     
     public CharacterBody2D Parent;
+
+    public void InitializeStateMachine(CharacterBody2D parent)
+    {
+        Parent = parent;
+    }
     
     public void ChangeState(StateType selectedState)
     {

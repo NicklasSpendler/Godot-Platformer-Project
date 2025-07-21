@@ -21,6 +21,10 @@ public partial class Hurtbox : Area2D
 
 	public void OnBodyEntered(Node body)
 	{
+		if (body is Enemy enemy)
+		{
+			GD.Print(enemy.Components.IsComponentActive(ComponentName.HealthComponent));
+		}
 		GD.Print(body.Name);
 	}
 }

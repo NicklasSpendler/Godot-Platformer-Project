@@ -57,25 +57,11 @@ public partial class EnemyPatrol : MoveState
         {
             Parent.StateMachine.ChangeState(StateType.EnemyFall);
         }
-
-        if (Direction.X >= 0.1)
-        {
-            Parent.Sprite2D.FlipH = false;
-        }
-        else if (Direction.X <= -0.1)
-        {
-            Parent.Sprite2D.FlipH = true;
-        }
         
         base.PhysicsUpdate(delta);
         
         if (Parent is Pig parent)
         {
-            if (parent.VisionShapeCast.IsColliding())
-            {
-                parent.StateMachine.ChangeState(StateType.EnemyBeginCharge);
-            }
-            
             if (parent.WallDetection.IsColliding())
             {
                 ChangeDirection();
@@ -85,6 +71,21 @@ public partial class EnemyPatrol : MoveState
             {
                 ChangeDirection();
             }
+            
+            
+            if (parent.VisionShapeCast.IsColliding())
+            {
+                parent.StateMachine.ChangeState(StateType.EnemyBeginCharge);
+            }
+        }
+        
+        if (Direction.X >= 0.1)
+        {
+            Parent.Sprite2D.FlipH = false;
+        }
+        else if (Direction.X <= -0.1)
+        {
+            Parent.Sprite2D.FlipH = true;
         }
     }
 

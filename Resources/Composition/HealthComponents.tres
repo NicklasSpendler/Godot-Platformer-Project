@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HealthComponent" load_steps=2 format=3 uid="uid://bi3at3r5c6v81"]
+
+[ext_resource type="Script" uid="uid://c73ryrqypu4ca" path="res://Classes/Composition/Components/HealthComponent.cs" id="1_l5v4x"]
+
+[resource]
+script = ExtResource("1_l5v4x")
+_maxHealth = 0.0
+metadata/_custom_type_script = "uid://c73ryrqypu4ca"
