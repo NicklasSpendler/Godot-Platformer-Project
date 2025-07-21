@@ -79,14 +79,15 @@ public partial class EnemyPatrol : MoveState
             }
         }
         
-        if (Direction.X >= 0.1)
+        if (Direction.X <= 0.1)
         {
             Parent.Sprite2D.FlipH = false;
         }
-        else if (Direction.X <= -0.1)
+        else if (Direction.X >= -0.1)
         {
             Parent.Sprite2D.FlipH = true;
         }
+        SetDetectionPosition();
     }
 
     private void ChangeDirection()
@@ -99,7 +100,13 @@ public partial class EnemyPatrol : MoveState
             parent.WallDetection.TargetPosition = newWallDetectionPosition;
 
             parent.VisionShapeCast.TargetPosition = new Vector2(parent.VisionShapeCast.TargetPosition.X * -1,0);
-            
+        }
+    }
+
+    public void SetDetectionPosition()
+    {
+        if (Parent is Pig parent)
+        {
             if (Direction.X >= 0.1)
             {
                 parent.WallDetection.Position = WallDetectionRightPos;

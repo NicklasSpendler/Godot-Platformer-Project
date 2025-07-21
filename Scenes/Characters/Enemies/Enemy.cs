@@ -30,7 +30,11 @@ public partial class Enemy : CharacterBody2D
 		if (StateMachine == null)
 		{
 			GD.PrintErr("No StateMachine found!");
-			return;
+		}
+
+		if (Components == null)
+		{
+			GD.PrintErr(Name ,"No Components found!");
 		}
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");

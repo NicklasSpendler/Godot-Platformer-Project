@@ -25,6 +25,7 @@ script = ExtResource("5_nspvf")
 metadata/_custom_type_script = "uid://t4c5al4dosdn"
 
 [sub_resource type="Resource" id="Resource_nspvf"]
+resource_local_to_scene = true
 script = ExtResource("4_5pp5w")
 States = Dictionary[int, ExtResource("3_tq8x3")]({
 6: SubResource("Resource_6qgph"),
@@ -35,15 +36,16 @@ States = Dictionary[int, ExtResource("3_tq8x3")]({
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
 
-[sub_resource type="Resource" id="Resource_bhtky"]
+[sub_resource type="Resource" id="Resource_1lvh4"]
 script = ExtResource("10_1lvh4")
 _maxHealth = 100.0
 metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 
-[sub_resource type="Resource" id="Resource_du03b"]
+[sub_resource type="Resource" id="Resource_tmqbw"]
+resource_local_to_scene = true
 script = ExtResource("11_tmqbw")
 Components = Dictionary[int, Object]({
-0: SubResource("Resource_bhtky")
+0: SubResource("Resource_1lvh4")
 })
 metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
@@ -337,7 +339,6 @@ graph_offset = Vector2(0, -84.2999)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgph"]
 
 [node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite", "Sprite2D", "AnimationTree") instance=ExtResource("1_qi8uk")]
-scale = Vector2(-1, 1)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_4b10j")
@@ -346,17 +347,17 @@ FloorDetection = NodePath("FloorCheck")
 VisionShapeCast = NodePath("VisionShapeCast")
 ExpressionSprite = NodePath("AngryEpxression")
 StateMachine = SubResource("Resource_nspvf")
-Components = SubResource("Resource_du03b")
+Components = SubResource("Resource_tmqbw")
 Sprite2D = NodePath("Sprite2D")
 AnimationTree = NodePath("AnimationTree")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("5_o4elo")
+flip_h = true
 hframes = 4
-frame = 2
+frame = 3
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_5pp5w")
 
@@ -371,7 +372,7 @@ tree_root = SubResource("AnimationNodeStateMachine_0x1pq")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="WallCheck" type="RayCast2D" parent="." index="4"]
-position = Vector2(-14, 6)
+position = Vector2(14, 6)
 target_position = Vector2(-8, 0)
 collision_mask = 2
 hit_from_inside = true
@@ -383,10 +384,9 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="VisionShapeCast" type="ShapeCast2D" parent="." index="6"]
-visible = false
 enabled = false
 shape = SubResource("RectangleShape2D_6qgph")
-target_position = Vector2(-100, 0)
+target_position = Vector2(100, 0)
 max_results = 1
 
 [node name="AngryEpxression" type="Sprite2D" parent="." index="7"]

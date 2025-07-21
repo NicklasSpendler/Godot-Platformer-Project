@@ -4,13 +4,12 @@
 
 [resource]
 script = ExtResource("1_3vugi")
-WallDetectionRightPos = Vector2(-14, 6)
-FloorDetectionRightPos = Vector2(-14, 16)
-WallDetectionLeftPos = Vector2(12, 6)
-FloorDetectionLeftPos = Vector2(12, 16)
-ExpressionRightPos = Vector2(-12, 2.2)
-ExpressionLeftPos = Vector2(12, 2.2)
-Speed = 100.0
+WallDetectionRightPos = Vector2(14, 6)
+FloorDetectionRightPos = Vector2(14, 16)
+WallDetectionLeftPos = Vector2(-12, 6)
+FloorDetectionLeftPos = Vector2(-12, 16)
+ExpressionRightPos = Vector2(12, 2.2)
+ExpressionLeftPos = Vector2(-12, 2.2)
 WallDetectionLength = 8.0
 InitialDirection = 1
 MaxSpeed = 100.0

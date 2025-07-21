@@ -41,20 +41,17 @@ public partial class Player : CharacterBody2D
 		base._Ready();
 		if (StateMachine == null)
 		{
-			GD.PrintErr("No state machine found!");
-			return;
+			GD.Print("No state machine found!");
 		}
 
 		if (AnimationPlayer == null)
 		{
-			GD.PrintErr("No animation player found!");
-			return;
+			GD.Print("No animation player found!");
 		}
 
 		if (Components == null)
 		{
-			GD.PrintErr("No components found!");
-			return;
+			GD.Print(Name ,"No components found!");
 		}
 		
 		Components.InitializeComponents(this);
@@ -76,13 +73,14 @@ public partial class Player : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+		GD.Print(StateMachine);
 		StateMachine.CurrentState.Update(delta);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		
+
 		
 		StateMachine.CurrentState.PhysicsUpdate(delta);
 	}
