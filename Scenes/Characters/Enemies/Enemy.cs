@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class Enemy : CharacterBody2D
+public partial class Enemy : Entity
 {
 
 	[ExportCategory("Movement")]
@@ -12,17 +12,12 @@ public partial class Enemy : CharacterBody2D
 
 	[Export] public float JumpVelocity = -400.0f;
 	
-	[ExportCategory("StateMachine")]
-	[Export]
-	public StateMachine StateMachine;
-
-	[ExportCategory("Components")]
-	[Export]
-	public Composition Components;
-	
 	[ExportCategory("Nodes")]
 	[Export] public Sprite2D Sprite2D;
 	[Export] public AnimationTree AnimationTree;
+	[Export] public HurtBox HurtBox;
+	[Export] public HitBox HitBox;
+	
 	public AnimationNodeStateMachinePlayback AnimationStateMachine;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -34,16 +29,22 @@ public partial class Enemy : CharacterBody2D
 			GD.PrintErr("No StateMachine found!");
 		}
 
-		if (Components == null)
+		if (Composition == null)
 		{
-			GD.PrintErr(Name ,"No Components found!");
+			GD.PrintErr(Name ,"No Composition found!");
 		}
+		
+		Composition?.InitializeComponents(this);
+		
+		HurtBox?.Initialize((HealthComponent)Composition?.GetComponent(ComponentName.HealthComponent));
+		HitBox?.Initialize((DamageComponent)Composition?.GetComponent(ComponentName.DamageComponent));
+		
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");
 		
 		StateMachine.InitializeStateMachine(this);
 		
-		Components.InitializeComponents(this);
+		Composition.InitializeComponents(this);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

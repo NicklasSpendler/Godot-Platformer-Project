@@ -1,7 +1,7 @@
-	using Godot;
+using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Entity
 {
 	[ExportCategory("Movement")]
 	[Export]
@@ -13,20 +13,21 @@ public partial class Player : CharacterBody2D
 	
 	[Export]
 	public float JumpVelocity = -400.0f;
-
-	[ExportCategory("Combat")]
-	[Export] public float Damage = 10.0f;
-
-	[ExportCategory("State Machine")]
+	
+	/*[ExportCategory("State Machine")]
 	[Export] public StateMachine StateMachine;
 	
-	[ExportCategory("Components")]
-	[Export] public Composition Components;
+	[ExportCategory("Composition")]
+	[Export] public Composition Composition;*/
 	
 	[ExportCategory("Nodes")]
 	[Export] public AnimationPlayer AnimationPlayer;
 	
 	[Export] public AnimationTree AnimationTree;
+	
+	[Export] public HurtBox HurtBox;
+	
+	[Export] public HitBox HitBox;
 
 	public AnimationNodeStateMachinePlayback AnimationStateMachine;
 		
@@ -47,12 +48,15 @@ public partial class Player : CharacterBody2D
 			GD.Print("No animation player found!");
 		}
 
-		if (Components == null)
+		if (Composition == null)
 		{
 			GD.Print(Name ,"No components found!");
 		}
 		
-		Components.InitializeComponents(this);
+		Composition.InitializeComponents(this);
+		
+		HurtBox.Initialize((HealthComponent)Composition.GetComponent(ComponentName.HealthComponent));
+		HitBox.Initialize((DamageComponent)Composition.GetComponent(ComponentName.DamageComponent));
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");
 		

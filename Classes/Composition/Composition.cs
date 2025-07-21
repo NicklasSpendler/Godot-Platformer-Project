@@ -12,7 +12,7 @@ public enum ComponentName
 public partial class Composition : Resource
 {
     [Export]
-    public Dictionary<ComponentName, Component> Components;
+    private Dictionary<ComponentName, Component> Components;
 
     private Node Parent;
     
@@ -30,6 +30,11 @@ public partial class Composition : Resource
                 curComponent.Initialize();
             }
         }
+    }
+
+    public Component GetComponent(ComponentName name)
+    {
+        return Components[name];
     }
 
     public bool IsComponentActive(ComponentName componentName)

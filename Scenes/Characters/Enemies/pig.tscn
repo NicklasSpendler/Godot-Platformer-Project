@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://daouw1odpflyw"]
+[gd_scene load_steps=44 format=3 uid="uid://daouw1odpflyw"]
 
 [ext_resource type="PackedScene" uid="uid://hdoq8arepg6a" path="res://Scenes/Characters/Enemies/enemy.tscn" id="1_qi8uk"]
 [ext_resource type="Script" uid="uid://bmc7kn0foijcv" path="res://Scenes/Characters/Enemies/Pig.cs" id="2_4b10j"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://c7rb2ufaownok" path="res://Classes/Composition/Composition.cs" id="10_1lvh4"]
 [ext_resource type="Script" uid="uid://bug5lqqb1qc26" path="res://Classes/Composition/Components/DamageComponent.cs" id="10_tmqbw"]
 [ext_resource type="Texture2D" uid="uid://bmlmdqvq8qjel" path="res://Assets/Tiles/AngryEpxression.png" id="12_yo147"]
+[ext_resource type="PackedScene" uid="uid://wydurll71nkn" path="res://Scenes/Components/HitBox.tscn" id="16_tmqbw"]
 
 [sub_resource type="Resource" id="Resource_du03b"]
 script = ExtResource("3_yo147")
@@ -64,21 +65,21 @@ States = Dictionary[int, Object]({
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
 
-[sub_resource type="Resource" id="Resource_tmqbw"]
+[sub_resource type="Resource" id="Resource_1lvh4"]
 script = ExtResource("9_0uceq")
-MaxHealth = 100.0
+MaxHealth = 0.0
 metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 
-[sub_resource type="Resource" id="Resource_j3cc3"]
+[sub_resource type="Resource" id="Resource_tmqbw"]
 script = ExtResource("10_tmqbw")
-DamageAmount = 10.0
+DamageAmount = 0.0
 metadata/_custom_type_script = "uid://bug5lqqb1qc26"
 
 [sub_resource type="Resource" id="Resource_bhtky"]
 script = ExtResource("10_1lvh4")
 Components = Dictionary[int, Object]({
-0: SubResource("Resource_tmqbw"),
-1: SubResource("Resource_j3cc3")
+0: SubResource("Resource_1lvh4"),
+1: SubResource("Resource_tmqbw")
 })
 metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
@@ -371,21 +372,25 @@ graph_offset = Vector2(0, -84.2999)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qgph"]
 
-[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite") instance=ExtResource("1_qi8uk")]
-collision_layer = 4
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmqbw"]
+
+[node name="Pig" node_paths=PackedStringArray("WallDetection", "FloorDetection", "VisionShapeCast", "ExpressionSprite", "HitBox") instance=ExtResource("1_qi8uk")]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("2_4b10j")
 WallDetection = NodePath("WallCheck")
 FloorDetection = NodePath("FloorCheck")
 VisionShapeCast = NodePath("VisionShapeCast")
 ExpressionSprite = NodePath("AngryEpxression")
+HitBox = NodePath("HitBox")
 StateMachine = SubResource("Resource_0b01y")
-Components = SubResource("Resource_bhtky")
+Composition = SubResource("Resource_bhtky")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("5_o4elo")
 flip_h = true
 hframes = 4
+frame = 3
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(-0.5, 5.5)
@@ -424,3 +429,12 @@ visible = false
 position = Vector2(-8, 1)
 scale = Vector2(0.255295, 0.255295)
 texture = ExtResource("12_yo147")
+
+[node name="HitBox" parent="." index="8" instance=ExtResource("16_tmqbw")]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(1, 6)
+shape = SubResource("RectangleShape2D_tmqbw")
+debug_color = Color(0.660667, 0.514321, 7.70092e-07, 0.42)

@@ -9,6 +9,7 @@ MaxHealth = 100.0
 metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_fx5ae")
 Components = Dictionary[int, Object]({
 0: SubResource("Resource_cueqf")

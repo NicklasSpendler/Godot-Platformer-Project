@@ -13,6 +13,8 @@ public partial class Pig : Enemy
     {
         base._Ready();
 
+        
+        
         if (IsOnFloor())
         {
             StateMachine.ChangeState(StateType.EnemyIdle);
