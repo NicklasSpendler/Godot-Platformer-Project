@@ -14,12 +14,6 @@ public partial class Player : Entity
 	[Export]
 	public float JumpVelocity = -400.0f;
 	
-	/*[ExportCategory("State Machine")]
-	[Export] public StateMachine StateMachine;
-	
-	[ExportCategory("Composition")]
-	[Export] public Composition Composition;*/
-	
 	[ExportCategory("Nodes")]
 	[Export] public AnimationPlayer AnimationPlayer;
 	
@@ -55,8 +49,8 @@ public partial class Player : Entity
 		
 		Composition.InitializeComponents(this);
 		
-		HurtBox.Initialize((HealthComponent)Composition.GetComponent(ComponentName.HealthComponent));
-		HitBox.Initialize((DamageComponent)Composition.GetComponent(ComponentName.DamageComponent));
+		HurtBox.Initialize((HealthComponent)Composition.GetComponent(ComponentName.HealthComponent), this);
+		HitBox.Initialize((DamageComponent)Composition.GetComponent(ComponentName.DamageComponent), this);
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");
 		

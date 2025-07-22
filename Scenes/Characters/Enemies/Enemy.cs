@@ -36,8 +36,8 @@ public partial class Enemy : Entity
 		
 		Composition?.InitializeComponents(this);
 		
-		HurtBox?.Initialize((HealthComponent)Composition?.GetComponent(ComponentName.HealthComponent));
-		HitBox?.Initialize((DamageComponent)Composition?.GetComponent(ComponentName.DamageComponent));
+		HurtBox?.Initialize((HealthComponent)Composition?.GetComponent(ComponentName.HealthComponent), this);
+		HitBox?.Initialize((DamageComponent)Composition?.GetComponent(ComponentName.DamageComponent), this);
 		
 		
 		AnimationStateMachine = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/playback");

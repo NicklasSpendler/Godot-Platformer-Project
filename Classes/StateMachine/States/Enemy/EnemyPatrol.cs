@@ -50,7 +50,16 @@ public partial class EnemyPatrol : MoveState
             Direction = Vector2.Right;
         }
     }
-    
+
+    public override void Exit(State NextState = null)
+    {
+        base.Exit(NextState);
+        if (Parent is Pig parent)
+        {
+            parent.VisionShapeCast.Enabled = false;
+        }
+    }
+
     public override void PhysicsUpdate(double delta)
     {
         if (!Parent.IsOnFloor())

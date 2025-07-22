@@ -9,10 +9,10 @@ public partial class PlayerRunningState : MoveState
     private bool _landing = false;
     
     [Export]
-    private Vector2 RightHurtboxPosition { get; set; }
+    private Vector2 RightHitboxPosition { get; set; }
     
     [Export]
-    private Vector2 LeftHurtboxPosition { get; set; }
+    private Vector2 LeftHitboxPosition { get; set; }
     
     public override void Enter(State PreviousState = null)
     {
@@ -27,17 +27,16 @@ public partial class PlayerRunningState : MoveState
     public override void Update(double delta)
     {
         base.Update(delta);
-
         
         if (Parent.Velocity.X > 0)
         {
             Parent.Sprite2D.FlipH = false;
-            //Parent.Hurtbox.Position = RightHurtboxPosition;
+            Parent.HitBox.Position = RightHitboxPosition;
         }
         else if (Parent.Velocity.X < 0)
         {
             Parent.Sprite2D.FlipH = true;
-            //Parent.Hurtbox.Position = LeftHurtboxPosition;
+            Parent.HitBox.Position = LeftHitboxPosition;
         }
     }
 

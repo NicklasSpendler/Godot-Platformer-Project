@@ -17,7 +17,17 @@ public partial class PlayerAttackState : State
     {
         Parent.AnimationStateMachine.Travel(_attackAnimation);
 
+        Parent.HitBox.Monitorable = true;
+        Parent.HitBox.Monitoring = true;
+        
         Parent.AnimationTree.AnimationFinished += OnAnimationFinished;
+    }
+
+    public override void Exit(State NextState = null)
+    {
+        base.Exit(NextState);
+        Parent.HitBox.Monitorable = false;
+        Parent.HitBox.Monitoring = false;
     }
 
     private void OnAnimationFinished(StringName animname)

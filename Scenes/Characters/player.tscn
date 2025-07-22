@@ -32,8 +32,8 @@ metadata/_custom_type_script = "uid://bue7wqkyyb2ll"
 
 [sub_resource type="Resource" id="Resource_yt1oc"]
 script = ExtResource("3_h1n2f")
-RightHurtboxPosition = Vector2(0, 0)
-LeftHurtboxPosition = Vector2(0, 0)
+RightHitboxPosition = Vector2(23, -5)
+LeftHitboxPosition = Vector2(-23, -5)
 MaxSpeed = 300.0
 Acceleration = 800.0
 JumpVelocity = -400.0
@@ -68,21 +68,21 @@ States = Dictionary[int, Object]({
 })
 metadata/_custom_type_script = "uid://cvc4ijjv2d4i3"
 
-[sub_resource type="Resource" id="Resource_3k74t"]
+[sub_resource type="Resource" id="Resource_ddhxa"]
 script = ExtResource("3_fcmex")
-MaxHealth = 0.0
+MaxHealth = 100.0
 metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 
-[sub_resource type="Resource" id="Resource_v8iml"]
+[sub_resource type="Resource" id="Resource_3k74t"]
 script = ExtResource("9_dxpk4")
-DamageAmount = 0.0
+DamageAmount = 10.0
 metadata/_custom_type_script = "uid://bug5lqqb1qc26"
 
-[sub_resource type="Resource" id="Resource_ddhxa"]
+[sub_resource type="Resource" id="Resource_v8iml"]
 script = ExtResource("3_xo8ps")
 Components = Dictionary[int, Object]({
-0: SubResource("Resource_3k74t"),
-1: SubResource("Resource_v8iml")
+0: SubResource("Resource_ddhxa"),
+1: SubResource("Resource_3k74t")
 })
 metadata/_custom_type_script = "uid://c7rb2ufaownok"
 
@@ -607,6 +607,7 @@ graph_offset = Vector2(0, -85.9378)
 size = Vector2(11, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yt1oc"]
+size = Vector2(33, 58)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "AnimationTree", "HurtBox", "HitBox", "Sprite2D")]
 collision_mask = 1026
@@ -617,7 +618,7 @@ HurtBox = NodePath("HurtBox")
 HitBox = NodePath("HitBox")
 Sprite2D = NodePath("Sprite2D")
 StateMachine = SubResource("Resource_fepmq")
-Composition = SubResource("Resource_ddhxa")
+Composition = SubResource("Resource_v8iml")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_40svl")
@@ -649,10 +650,14 @@ shape = SubResource("RectangleShape2D_15c3i")
 debug_color = Color(0.973917, 0, 0.430551, 0.42)
 
 [node name="HitBox" parent="." instance=ExtResource("17_15c3i")]
+position = Vector2(23, -5)
+collision_layer = 512
+collision_mask = 0
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_yt1oc")
+debug_color = Color(0.454635, 0.594917, 0, 0.42)
 
 [editable path="HurtBox"]

@@ -14,6 +14,7 @@ public enum StateType
     EnemyPatrol,
     EnemyBeginCharge,
     EnemyCharge,
+    Knockback
 };
 
 [GlobalClass]
@@ -27,6 +28,11 @@ public partial class StateMachine : Resource
     public void InitializeStateMachine(CharacterBody2D parent)
     {
         Parent = parent;
+    }
+
+    public State GetState(StateType type)
+    {
+        return States[type];
     }
     
     public void ChangeState(StateType selectedState)
