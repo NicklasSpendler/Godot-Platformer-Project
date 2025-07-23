@@ -8,14 +8,14 @@ public partial class PlayerIdleState : MoveState
     
     private bool _landing = false;
     
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("idle");
     }
 
-    public override void Exit(State PreviousState = null)
+    public override void Exit(State nextState = null)
     {
-        base.Exit(PreviousState);
+        base.Exit(nextState);
     }
     
     public override void Update(double delta)

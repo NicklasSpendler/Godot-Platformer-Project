@@ -33,7 +33,7 @@ public partial class EnemyPatrol : MoveState
 
     [Export] private DirectionEnum InitialDirection;
     
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         if (Parent is Pig parent)
         {
@@ -51,9 +51,9 @@ public partial class EnemyPatrol : MoveState
         }
     }
 
-    public override void Exit(State NextState = null)
+    public override void Exit(State nextState = null)
     {
-        base.Exit(NextState);
+        base.Exit(nextState);
         if (Parent is Pig parent)
         {
             parent.VisionShapeCast.Enabled = false;
@@ -121,12 +121,14 @@ public partial class EnemyPatrol : MoveState
                 parent.WallDetection.Position = WallDetectionRightPos;
                 parent.FloorDetection.Position = FloorDetectionRightPos;
                 parent.ExpressionSprite.Position = ExpressionRightPos;
+                InitialDirection = DirectionEnum.Right;
             }
             else if (Direction.X <= -0.1)
             {
                 parent.WallDetection.Position = WallDetectionLeftPos;
                 parent.FloorDetection.Position = FloorDetectionLeftPos;
                 parent.ExpressionSprite.Position = ExpressionLeftPos;
+                InitialDirection = DirectionEnum.Left;
             }    
         }
     }

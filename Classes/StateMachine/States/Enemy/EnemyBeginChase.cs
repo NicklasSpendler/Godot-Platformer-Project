@@ -10,13 +10,13 @@ public partial class EnemyBeginChase : State
 
     private Vector2 _direction;
 
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("anger");
 
         Parent.AnimationTree.AnimationFinished += OnFinishedAnimation;
 
-        if (PreviousState is MoveState moveState)
+        if (previousState is MoveState moveState)
         {
             _direction = moveState.Direction;
         }
@@ -30,9 +30,9 @@ public partial class EnemyBeginChase : State
         }
     }
 
-    public override void Exit(State NextState = null)
+    public override void Exit(State nextState = null)
     {
-        if (NextState is MoveState moveState)
+        if (nextState is MoveState moveState)
         {
             moveState.Direction = _direction;
         }

@@ -14,7 +14,7 @@ public partial class MoveState : State
     
     public Vector2 Direction = Vector2.Zero;
     
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         throw new NotImplementedException();
     }

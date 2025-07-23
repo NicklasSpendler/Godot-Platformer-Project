@@ -6,14 +6,14 @@ public partial class PlayerFallingState : State
 {
     private new Player Parent => base.Parent as Player;
     
-    Vector2 velocity = Vector2.Zero;
+    private Vector2 _velocity = Vector2.Zero;
     private bool CanCheckFloor = false;
     
-    public override void Enter(State PreviousState)
+    public override void Enter(State previousState)
     {
         Parent.AnimationStateMachine.Travel("jump_falling");
         
-        velocity = Parent.Velocity;
+        _velocity = Parent.Velocity;
     }
 
     public override void PhysicsUpdate(double delta)
@@ -31,9 +31,9 @@ public partial class PlayerFallingState : State
         
         HandleFallingMovement(delta);
         
-        velocity += Parent.GetGravity() * (float)delta;
+        _velocity += Parent.GetGravity() * (float)delta;
         
-        Parent.Velocity = velocity;
+        Parent.Velocity = _velocity;
         
         Parent.MoveAndSlide();
     }
@@ -45,11 +45,11 @@ public partial class PlayerFallingState : State
         if (direction != Vector2.Zero)
         {
             //velocity.X = direction.X * HandleSpeed;
-            velocity.X = Mathf.MoveToward(velocity.X, direction.X * Parent.MaxSpeed, Parent.Acceleration * (float)delta);
+            _velocity.X = Mathf.MoveToward(_velocity.X, direction.X * Parent.MaxSpeed, Parent.Acceleration * (float)delta);
         }
         else
         {
-            velocity.X = Mathf.MoveToward(velocity.X, 0, Parent.Friction * (float)delta);
+            _velocity.X = Mathf.MoveToward(_velocity.X, 0, Parent.Friction * (float)delta);
         }
     }
 }

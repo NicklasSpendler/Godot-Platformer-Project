@@ -4,11 +4,11 @@ using System;
 [GlobalClass]
 public abstract partial class State : Resource
 {
-    public CharacterBody2D Parent;
+    public Entity Parent;
     public StateMachine StateMachine;
-    public abstract void Enter(State PreviousState = null);
+    public abstract void Enter(State previousState = null);
 
-    public virtual void Exit(State NextState = null)
+    public virtual void Exit(State nextState = null)
     {
     }
     

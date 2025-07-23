@@ -7,7 +7,7 @@ public partial class EnemyCharge : MoveState
     [Export] private float _chargeTime = 1.5f;
     
     private new Enemy Parent => base.Parent as Enemy;
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("run");
         HandleStopCharge();

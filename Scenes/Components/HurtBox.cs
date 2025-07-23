@@ -28,10 +28,13 @@ public partial class HurtBox : Area2D
 			
 			
 			KnockbackState knockbackState = (KnockbackState)Parent.StateMachine.GetState(StateType.Knockback);
+			if (Parent.StateMachine.CurrentState == knockbackState)
+			{
+				knockbackState.RepeatKnockback();
+				return;
+			}
 			knockbackState.InitializeKnockback(hitBox, hitBox.DamageComponent);
+			Parent.StateMachine.ChangeState(StateType.Knockback);
 		}
-
-		
-		Parent.StateMachine.ChangeState(StateType.Knockback);
 	}
 }

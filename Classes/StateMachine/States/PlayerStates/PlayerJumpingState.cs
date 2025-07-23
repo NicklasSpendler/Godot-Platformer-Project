@@ -8,7 +8,7 @@ public partial class PlayerJumpingState : State
     Vector2 velocity = Vector2.Zero;
     private bool CanCheckFloor = false;
     
-    public override async void Enter(State PreviousState)
+    public override async void Enter(State previousState)
     {
         CanCheckFloor = false;
         

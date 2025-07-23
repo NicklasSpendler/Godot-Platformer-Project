@@ -12,8 +12,6 @@ public partial class Pig : Enemy
     public override void _Ready()
     {
         base._Ready();
-
-        
         
         if (IsOnFloor())
         {

@@ -6,7 +6,7 @@ public partial class EnemyIdle : State
 {
     private new Enemy Parent => base.Parent as Enemy;
 
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("idle");
     }

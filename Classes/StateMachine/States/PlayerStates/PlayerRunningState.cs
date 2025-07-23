@@ -14,14 +14,14 @@ public partial class PlayerRunningState : MoveState
     [Export]
     private Vector2 LeftHitboxPosition { get; set; }
     
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("run");
     }
 
-    public override void Exit(State PreviousState = null)
+    public override void Exit(State nextState = null)
     {
-        base.Exit(PreviousState);
+        base.Exit(nextState);
     }
 
     public override void Update(double delta)

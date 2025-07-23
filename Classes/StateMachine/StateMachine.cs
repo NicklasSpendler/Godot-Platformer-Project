@@ -23,9 +23,9 @@ public partial class StateMachine : Resource
     [Export] public Godot.Collections.Dictionary<StateType, State> States;
     public State CurrentState;
     
-    public CharacterBody2D Parent;
+    public Entity Parent;
 
-    public void InitializeStateMachine(CharacterBody2D parent)
+    public void InitializeStateMachine(Entity parent)
     {
         Parent = parent;
     }

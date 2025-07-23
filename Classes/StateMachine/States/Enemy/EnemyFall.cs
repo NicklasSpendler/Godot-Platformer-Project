@@ -8,7 +8,7 @@ public partial class EnemyFall : State
 
     private Vector2 velocity;
     
-    public override void Enter(State PreviousState = null)
+    public override void Enter(State previousState = null)
     {
         Parent.AnimationStateMachine.Travel("idle");
 
