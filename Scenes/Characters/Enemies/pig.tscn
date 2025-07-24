@@ -81,8 +81,8 @@ metadata/_custom_type_script = "uid://c73ryrqypu4ca"
 [sub_resource type="Resource" id="Resource_j3cc3"]
 script = ExtResource("10_tmqbw")
 DamageAmount = 10.0
-KnockbackHorizontalStrength = 100.0
-KnockbackVerticalStrength = 100.0
+KnockbackHorizontalStrength = 0.0
+KnockbackVerticalStrength = 0.0
 metadata/_custom_type_script = "uid://bug5lqqb1qc26"
 
 [sub_resource type="Resource" id="Resource_0q1du"]

@@ -26,7 +26,6 @@ public partial class HurtBox : Area2D
 			
 			HealthComponent.TakeDamage(Damage);
 			
-			
 			KnockbackState knockbackState = (KnockbackState)Parent.StateMachine.GetState(StateType.Knockback);
 			if (Parent.StateMachine.CurrentState == knockbackState)
 			{
