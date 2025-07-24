@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bnc63pkj8os11"]
+[gd_scene load_steps=7 format=4 uid="uid://bnc63pkj8os11"]
 
 [ext_resource type="Texture2D" uid="uid://crafcbi4certx" path="res://Assets/Tiles/Tiles.png" id="1_s0gyx"]
 [ext_resource type="PackedScene" uid="uid://bqies6su7v02t" path="res://Scenes/Characters/player.tscn" id="2_yjsus"]
 [ext_resource type="PackedScene" uid="uid://daouw1odpflyw" path="res://Scenes/Characters/Enemies/pig.tscn" id="3_u872a"]
+[ext_resource type="PackedScene" uid="uid://b7bft6fmi3bvo" path="res://UI/HealthHUD.tscn" id="4_nk5xi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjsus"]
 texture = ExtResource("1_s0gyx")
@@ -662,3 +663,7 @@ position = Vector2(199, 75)
 
 [node name="Player" parent="." instance=ExtResource("2_yjsus")]
 position = Vector2(90, 67)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="HUD" instance=ExtResource("4_nk5xi")]

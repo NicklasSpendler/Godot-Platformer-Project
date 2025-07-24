@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7bft6fmi3bvo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub0ns"]
+bg_color = Color(0.87451, 0, 0, 1)
+
+[node name="HealthHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/fill = SubResource("StyleBoxFlat_ub0ns")
+value = 68.46
+show_percentage = false
